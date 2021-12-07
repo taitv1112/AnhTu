@@ -7,17 +7,14 @@ public class Room implements Serializable {
     private String room_Name;
     private int restroom;
     private int bedroom;
-    private final String ROOM_EMPTY = "ROOM EMPTY";
-    private final String ROOM_USE = "ROOM USER";
-    private final String ROOM_CLEANING = "ROOM CLEANING";
+    public static final String ROOM_EMPTY = "ROOM EMPTY";
+    public static String ROOM_USE = "ROOM USER";
+    public static String ROOM_CLEANING = "ROOM CLEANING";
     private String status;
-    private long check_in_time;
-    private long check_out_time;
     private double price;
 
     public Room() {
     }
-
 
     public Room(int id, String room_Name, int restroom, int bedroom, String status, double price) {
         this.id = id;
@@ -25,6 +22,14 @@ public class Room implements Serializable {
         this.restroom = restroom;
         this.bedroom = bedroom;
         this.status = status;
+        this.price = price;
+    }
+    public Room(int id, String room_Name, int restroom, int bedroom,  double price) {
+        this.id = id;
+        this.room_Name = room_Name;
+        this.restroom = restroom;
+        this.bedroom = bedroom;
+        this.status = ROOM_EMPTY;
         this.price = price;
     }
 
@@ -94,13 +99,5 @@ public class Room implements Serializable {
     public String toString() {
         return
                 id + ","+ room_Name+ ","+ restroom+ ","+ bedroom+ "," + status+ "," + price +'\n';
-//                "Room{" +
-//                "id=" + id +
-//                ", room_Name='" + room_Name + '\'' +
-//                ", restroom=" + restroom +
-//                ", bedroom=" + bedroom +
-//                ", status='" + status + '\'' +
-//                ", price=" + price +
-//                '}'+ '\n';
     }
 }

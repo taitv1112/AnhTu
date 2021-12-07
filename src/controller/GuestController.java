@@ -19,7 +19,11 @@ public class GuestController {
         return guestService.fillAll();
     }
 
-    public void createGuest(Guest guest) {
+    public void createGuest(Guest guest) throws IOException {
         guestService.save(guest);
     }
+    public int findIndexByUserName(String userName) {
+        return guestService.findIndexByUserName(userName);
+    }
+
 }

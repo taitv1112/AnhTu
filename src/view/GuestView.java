@@ -24,6 +24,7 @@ public class GuestView {
     GuestController guestController = new GuestController();
     List<Room> roomList = roomController.showListRoom();
     List<Guest> guestList = guestController.showListGuest();
+
     public GuestView() throws IOException {
     }
 
@@ -47,30 +48,20 @@ public class GuestView {
                 System.out.format("%-5s %-10s %-10s %-10s %-15s %-5s \n", line[0], line[1], line[2], line[3], line[4], line[5]);
             }
         }
-
     }
 
-    public void createGuest() {
-        Room room = new Room();
-        Receipt receipt = new Receipt();
-        Date date = new Date();
 
-            System.out.println("Hay nhap ten cua quy khach");
-            String guest_Name = Path.sc().nextLine();
-            System.out.println("Hay nhap so dien thoai cua quy khach");
-            int guest_PhoneNumber = Integer.parseInt(Path.sc().nextLine());
-            System.out.println("Hay nhap dia chi email cua quy khach");
-            String guest_Email = Path.sc().nextLine();
-            System.out.println("Nhap ten phong muon thue");
-            String room_Name = Path.sc().nextLine();
-            for (int i = 0; i < roomList.size(); i++) {
-                if (roomList.get(i).getRoom_Name().equals(room_Name) && roomList.get(i).getStatus().equals("ROOM EMPTY")) {
-                    Guest guest = new Guest(room, guest_Name, guest_PhoneNumber, guest_Email);
-                    guestController.createGuest(guest);
-
-                }
-            }
-        System.out.println("Dang ky phong thanh cong");
-
+    public Guest createGuest() throws IOException {
+        System.out.println("Hay nhap ten cua quy khach");
+        String guest_Name = Path.sc().nextLine();
+        System.out.println("Hay nhap so dien thoai cua quy khach");
+        int guest_PhoneNumber = Integer.parseInt(Path.sc().nextLine());
+        System.out.println("Hay nhap dia chi email cua quy khach");
+        String guest_Email = Path.sc().nextLine();
+        Guest guest = new Guest(guest_Name,guest_PhoneNumber,guest_Email);
+        return guest;
+    }
+    public void addGuestList() throws IOException {
+        guestController.createGuest(createGuest());
     }
 }

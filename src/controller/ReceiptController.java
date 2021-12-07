@@ -8,19 +8,24 @@ import java.io.IOException;
 import java.util.List;
 
 public class ReceiptController {
-    IReceiptService iReceiptService = new ReceiptServiceServiceImpl();
+    ReceiptServiceServiceImpl receiptServiceService = new ReceiptServiceServiceImpl();
 
     public List<Receipt> showListReceipt() throws IOException {
-        return iReceiptService.fillAll();
+        return receiptServiceService.fillAll();
     }
 
-    public void createReceipt(Receipt receipt) {
-        iReceiptService.save(receipt);
+    public void createReceipt(Receipt receipt) throws IOException {
+        receiptServiceService.save(receipt);
+    }
+    public void editReceipt(int index,Receipt receipt) throws IOException {
+        receiptServiceService.edit(index,receipt);
     }
 
+    public int findIndexByIdReceipt(int idReceipt) throws IOException {
+       return receiptServiceService.findIndexByidReceipt(idReceipt);
+    }
     public Receipt detailReceipt(int id) {
-        return iReceiptService.findID(id);
+        return receiptServiceService.findID(id);
     }
-
 
 }

@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class RoomController {
-    IRoomService roomService = new RoomServiceImpl();
+    RoomServiceImpl roomService = new RoomServiceImpl();
 
     public List<Room> showListRoom() throws IOException {
         return roomService.fillAll();
@@ -30,7 +30,12 @@ public class RoomController {
             roomService.edit(id, room);
 
     }
-
+    public int indexFindByRoomName(String roomName) {
+        return roomService.indexFindByRoomName(roomName);
+    }
+    public int indexFindByRoomID(int RoomID) {
+        return roomService.IndexFindById(RoomID);
+    }
 
 
 }

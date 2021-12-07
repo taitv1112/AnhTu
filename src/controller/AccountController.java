@@ -15,6 +15,9 @@ public class AccountController {
     public void createAcc(Account account) throws IOException {
         accountService.addAccount(account);
     }
+    public int findIndexByUserNameAccount(String userName) {
+       return accountService.findIndexByUserNameAccount(userName);
+    }
 
 
 }

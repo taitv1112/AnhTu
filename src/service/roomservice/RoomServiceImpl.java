@@ -42,6 +42,14 @@ public class RoomServiceImpl implements IRoomService{
         }
         return -1;
     }
+    public int indexFindByRoomName(String roomName) {
+        for (int i = 0; i < roomList.size(); i++) {
+            if (roomName.equals(roomList.get(i).getRoom_Name())) {
+                return i;
+            }
+        }
+        return -1;
+    }
 
 
 

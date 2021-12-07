@@ -1,27 +1,28 @@
 package model;
 
-public class Guest {
-    private Room room;
+import java.io.Serializable;
+
+public class Guest implements Serializable {
+    private int idGuest;
     private String guest_Name;
     private int guest_PhoneNumber;
     private String guest_Email;
+    private static int idNumber =1 ;
 
-    public Guest() {
-    }
 
-    public Guest(Room room, String guest_Name, int guest_PhoneNumber, String guest_Email) {
-        this.room = room;
+    public Guest( String guest_Name, int guest_PhoneNumber, String guest_Email) {
+        int idGuest =idNumber++;
         this.guest_Name = guest_Name;
         this.guest_PhoneNumber = guest_PhoneNumber;
         this.guest_Email = guest_Email;
     }
 
-    public Room getRoom() {
-        return room;
+    public int getIdGuest() {
+        return idGuest;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setIdGuest(int idGuest) {
+        this.idGuest = idGuest;
     }
 
     public String getGuest_Name() {
@@ -48,10 +49,10 @@ public class Guest {
         this.guest_Email = guest_Email;
     }
 
+
     @Override
     public String toString() {
         return "Guest{" +
-                "room=" + room +
                 ", guest_Name='" + guest_Name + '\'' +
                 ", guest_PhoneNumber='" + guest_PhoneNumber + '\'' +
                 ", guest_Email='" + guest_Email + '\'' +
