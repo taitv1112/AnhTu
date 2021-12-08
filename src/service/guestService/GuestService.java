@@ -16,13 +16,14 @@ public class GuestService {
     List<Guest> guestList = configReadAndWriteFile.readFromFile(PATH_GUEST);
 
     public List<Guest> fillAll() throws IOException {
+        configReadAndWriteFile.writeToFile(PATH_GUEST,guestList);
         return guestList;
     }
 
     public void save(Guest guest) throws IOException {
-        System.out.println(guest.toString());
         guestList.add(guest);
         configReadAndWriteFile.writeToFile(PATH_GUEST,guestList);
+
     }
     public int findIndexByUserName(String guestName) {
         for (int i = 0; i < guestList.size(); i++) {

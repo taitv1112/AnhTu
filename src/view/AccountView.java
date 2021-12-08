@@ -9,10 +9,7 @@ import model.Account;
 import java.io.IOException;
 
 public class AccountView {
-    GuestController guestController = new GuestController();
-    AccountController accountController = new AccountController();
-    ReceiptView receiptView = new ReceiptView();
-    RoomView roomView = new RoomView();
+
 
 
     public AccountView() throws IOException {
@@ -30,8 +27,7 @@ public class AccountView {
             String isAvailableAccountManager = checkAdmin_Staff(userName,password);
             if(isAvailableAccountUsser){
                 return Account.USER;
-            }else
-            if(isAvailableAccountManager.equals(Account.ADMIN)){
+            }else if(isAvailableAccountManager.equals(Account.ADMIN)){
                 return Account.ADMIN;
             }else if(isAvailableAccountManager.equals(Account.STAFF)){
                 return Account.STAFF;
@@ -47,8 +43,10 @@ public class AccountView {
     }
 //kiem tra tren cung 1 list account, va check theo roll;
     public boolean checkUser(String userName, String password) throws IOException {
+        GuestController guestController = new GuestController();
        int index = guestController.findIndexByUserNameGuest(userName);
         if (index > -1 ) {
+            System.out.println(guestController.showListGuest().get(index).toString());
             return password.equals(guestController.showListGuest().get(index).getGuest_Email());
         }else {
             return false;
@@ -57,8 +55,10 @@ public class AccountView {
     }
 
     public String checkAdmin_Staff(String userName, String password) {
+        AccountController accountController = new AccountController();
         int index = accountController.findIndexByUserNameAccount(userName);
         if(index >-1){
+            System.out.println(accountController.showListAcc().get(index).toString());
         Account account = accountController.showListAcc().get(index);
         if (account.getRole().equals(Account.ADMIN) && password.equals(account.getPassUser())) {
             return Account.ADMIN;
@@ -89,6 +89,7 @@ public class AccountView {
     }
 
     public void addAccount(String type) throws IOException {
+        AccountController accountController = new AccountController();;
         if (type.equals(Account.ADMIN)) {
             System.out.println("Enter Secert Code");
             String secretCode = Path.sc().nextLine();
@@ -103,6 +104,7 @@ public class AccountView {
     }
 
     public void showCvAndProcessing() {
+        AccountController accountController = new AccountController();
         int count = 0;
         for (Account a : accountController.showListAcc()) {
             if (a.getRole().equals(Account.USER)) {
@@ -132,6 +134,8 @@ public class AccountView {
         }
     }
     public void viewMenuAmin() throws IOException {
+        ReceiptView receiptView = new ReceiptView();
+        RoomView roomView = new RoomView();
         while(true){
             System.out.println("QUan ly khach san");
             System.out.println("1. Quan ly phong");
@@ -149,6 +153,8 @@ public class AccountView {
 
     }
     public void viewMenuStaff() throws IOException {
+        ReceiptView receiptView = new ReceiptView();
+        RoomView roomView = new RoomView();
         while(true){
             System.out.println("QUan ly khach san");
             System.out.println("1. Quan ly phong");

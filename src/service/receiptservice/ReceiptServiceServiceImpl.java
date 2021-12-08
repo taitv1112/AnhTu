@@ -15,6 +15,7 @@ public class ReceiptServiceServiceImpl implements IReceiptService {
 
     @Override
     public List<Receipt> fillAll() throws IOException {
+        configReadAndWriteFile.writeToFile(PATH_RECEIPT, receiptList);
         return receiptList;
     }
 

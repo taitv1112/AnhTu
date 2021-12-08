@@ -14,7 +14,7 @@ public class RoomController {
         return roomService.fillAll();
     }
 
-    public void createRoom(Room room) {
+    public void createRoom(Room room) throws IOException {
         roomService.save(room);
     }
 
@@ -22,11 +22,11 @@ public class RoomController {
         return roomService.findID(id);
     }
 
-    public boolean deleteRoom(int id) {
+    public boolean deleteRoom(int id) throws IOException {
         return roomService.delete(id);
     }
 
-    public void editRoom(int id, Room room) {
+    public void editRoom(int id, Room room) throws IOException {
             roomService.edit(id, room);
 
     }

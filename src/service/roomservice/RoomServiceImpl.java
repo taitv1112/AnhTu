@@ -20,8 +20,9 @@ public class RoomServiceImpl implements IRoomService{
     }
 
     @Override
-    public void save(Room room) {
+    public void save(Room room) throws IOException {
         roomList.add(room);
+        configReadAndWriteFile.writeToFile(PATH_ROOM, roomList);
     }
 
     @Override
@@ -54,19 +55,21 @@ public class RoomServiceImpl implements IRoomService{
 
 
     @Override
-    public boolean delete(int id) {
+    public boolean delete(int id) throws IOException {
         if (findID(id) !=null) {
             roomList.remove(id -1);
+            configReadAndWriteFile.writeToFile(PATH_ROOM, roomList);
             return true;
         }
         return false;
     }
 
     @Override
-    public void edit(int id, Room room) {
+    public void edit(int id, Room room) throws IOException {
         if (IndexFindById(id) >=0) {
             roomList.set(IndexFindById(id), room);
         }
+        configReadAndWriteFile.writeToFile(PATH_ROOM, roomList);
     }
 
     @Override
