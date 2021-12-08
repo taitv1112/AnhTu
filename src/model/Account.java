@@ -9,19 +9,41 @@ pass khách = guest.sđt
 public class Account implements Serializable {
     private String userName;
     private String passUser;
-    private Guest guest;
+    private String name;
+    private String phone;
+    private String address;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     private String role;
     public static final String STAFF = "STAFF";
     public static final String ADMIN = "ADMIN";
     public static final String USER = "USER";
-    public Guest getGuest() {
-        return guest;
-    }
+
     private boolean check;
 
-    public void setGuest(Guest guest) {
-        this.guest = guest;
-    }
 
     public String getRole() {
         return role;
@@ -34,15 +56,20 @@ public class Account implements Serializable {
     public Account() {
     }
 
+    public Account(String userName, String passUser, String name, String phone, String address) {
+        this.userName = userName;
+        this.passUser = passUser;
+        this.name = name;
+        this.phone = phone;
+        this.address = address;
+        this.role = Account.USER;
+    }
+
     public Account(String userName, String passUser) {
         this.userName = userName;
         this.passUser = passUser;
-    }
+        this.role = Account.ADMIN;
 
-    public Account(String userName, String passUser, Guest guest) {
-        this.userName = userName;
-        this.passUser = passUser;
-        this.guest = guest;
     }
 
     public String getUserName() {
@@ -74,7 +101,7 @@ public class Account implements Serializable {
         return "Account{" +
                 "userName='" + userName + '\'' +
                 ", passUser='" + passUser + '\'' +
-                ", guest=" + guest +
+
                 ", role='" + role + '\'' +
                 ", check=" + check +
                 '}';

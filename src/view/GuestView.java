@@ -20,36 +20,13 @@ import java.util.List;
 
  */
 public class GuestView {
-    RoomController roomController = new RoomController();
+    ReceiptView receiptView = new ReceiptView();
+    RoomView roomView = new RoomView();
     GuestController guestController = new GuestController();
-    List<Room> roomList = roomController.showListRoom();
-    List<Guest> guestList = guestController.showListGuest();
+
 
     public GuestView() throws IOException {
     }
-
-    public void viewShowListRoomInGuest() throws IOException {
-        System.out.println("            ----Danh sach phong dang trong----      ");
-        System.out.format("%-5s %-10s %-10s %-10s %-15s %-5s \n",
-                "id", "Room_Name", "Rest_Room", "Bed_room", "Status", "Price");
-        for (Room r : roomList) {
-            if (r.getStatus().equals("ROOM EMPTY")) {
-                String[] line = r.toString().split(",");
-                System.out.format("%-5s %-10s %-10s %-10s %-15s %-5s \n", line[0], line[1], line[2], line[3], line[4], line[5]);
-            }
-        }
-    }
-
-    public void roomSearchByPrice(double min, double max) {
-        for (Room r : roomList) {
-            Room room = guestController.searchValuePrice(min, max, r);
-            if (room != null) {
-                String[] line = room.toString().split(",");
-                System.out.format("%-5s %-10s %-10s %-10s %-15s %-5s \n", line[0], line[1], line[2], line[3], line[4], line[5]);
-            }
-        }
-    }
-
 
     public Guest createGuest() throws IOException {
         System.out.println("Hay nhap ten cua quy khach");
@@ -63,5 +40,20 @@ public class GuestView {
     }
     public void addGuestList() throws IOException {
         guestController.createGuest(createGuest());
+    }
+    public void viewMenuGuest() throws IOException {
+        while (true) {
+            System.out.println("1. Tim phong");
+            System.out.println("2. Dang ky phong");
+            System.out.println("3. Dich vu VIP ");
+            System.out.println("4. back ");
+            int choiceGuest = Integer.parseInt(Path.sc().nextLine());
+            switch (choiceGuest) {
+                case 1: roomView.viewMenuRoomGuest();break;
+                case 2:receiptView.receiptUser();break;
+                case 3:break;
+                case 4:new Main();
+            }
+        }
     }
 }

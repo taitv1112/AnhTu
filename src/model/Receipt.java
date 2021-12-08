@@ -8,8 +8,8 @@ public class Receipt implements Serializable {
     public static final String PENDING = "PENDING";
     public static final String ODER = "ODER";
     public static final String DONE = "DONE";
-    private Date dateCheckIn;
-    private  Date dateCheckOut;
+    private String dateCheckIn;
+    private String dateCheckOut;
     private long startTime;
     private long endTime;
     private Room room;
@@ -19,21 +19,10 @@ public class Receipt implements Serializable {
     private double bill;
     private String receipt_Status;
 
-    public Date getDateCheckIn() {
-        return dateCheckIn;
-    }
 
-    public void setDateCheckIn(Date dateCheckIn) {
-        this.dateCheckIn = dateCheckIn;
-    }
 
-    public Date getDateCheckOut() {
-        return dateCheckOut;
-    }
 
-    public void setDateCheckOut(Date dateCheckOut) {
-        this.dateCheckOut = dateCheckOut;
-    }
+
 
     public long getStartTime() {
         return startTime;
@@ -81,7 +70,7 @@ public class Receipt implements Serializable {
 
     public Receipt(int idReceipt, Room room, Account account, Guest guest) {
         this.idReceipt = idReceipt;
-        this.dateCheckIn=new Date();
+
         this.startTime = System.currentTimeMillis();
         this.receipt_Status = Receipt.PENDING;
         this.room = room;
@@ -90,11 +79,18 @@ public class Receipt implements Serializable {
     }
     public Receipt(int idReceipt,Room room, Guest guest) {
         this.idReceipt = idReceipt;
-        this.dateCheckIn=new Date();
+
         this.startTime = System.currentTimeMillis();
         this.receipt_Status = Receipt.PENDING;
         this.room = room;
         this.guest = guest;
+    }
+
+    public Receipt(Date dateCheckIn, Room room, Guest guest, int idReceipt) {
+
+        this.room = room;
+        this.guest = guest;
+        this.idReceipt = idReceipt;
     }
 
     public Room getRoom() {
@@ -121,9 +117,17 @@ public class Receipt implements Serializable {
 
     @Override
     public String toString() {
-        return idReceipt+ "," + room.getRoom_Name()+ "," + account.getGuest()+
-                ","+ account.getUserName()+
-                ","+ dateCheckIn+ "," +
-                dateCheckOut+ ","+ bill;
+        return "Receipt{" +
+                "dateCheckIn='" + dateCheckIn + '\'' +
+                ", dateCheckOut='" + dateCheckOut + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", room=" + room +
+                ", guest=" + guest +
+                ", account=" + account +
+                ", idReceipt=" + idReceipt +
+                ", bill=" + bill +
+                ", receipt_Status='" + receipt_Status + '\'' +
+                '}';
     }
 }

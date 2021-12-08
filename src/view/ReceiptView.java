@@ -16,7 +16,7 @@ import java.util.List;
 
 public class ReceiptView {
     Regex regex = new Regex();
-    GuestView guestView = new GuestView();
+
     AccountController accountController = new AccountController();
     GuestController guestController = new GuestController();
     ReceiptController receiptController = new ReceiptController();
@@ -59,6 +59,7 @@ public class ReceiptView {
             if(type.equals(Account.STAFF)){
                 Account accountStaff = accountStaff();
                 Guest guest =getGuest();
+
                 Receipt receipt = new Receipt(id,room,guest);
                 receiptController.createReceipt(receipt);
             }else {
@@ -70,7 +71,7 @@ public class ReceiptView {
         }
     }
 
-    public void createReceiptCheckOut(String type) throws IOException {
+    public void createReceiptCheckOut() throws IOException {
         while (true) {
             int idReceipt = Integer.parseInt(regex.validate("Nhap id hoa don", "nhap so nguyen", Regex.NUMBER));
             int index = receiptController.findIndexByIdReceipt(idReceipt);
@@ -94,7 +95,7 @@ public class ReceiptView {
     }
 
     private Guest getGuest() throws IOException {
-
+        GuestView guestView = new GuestView();
         System.out.println("Thong tin nguoi su dung . Neu da co tai khoan an 1 . chua thi an an key");
         String option = Path.sc().nextLine();
         if(option.equals("1")){
@@ -149,12 +150,69 @@ public class ReceiptView {
         while (true) {
             System.out.println("Nhap ten khach cho thue");
             String guestName = Path.sc().nextLine();
-            int index = guestController.findIndexByUserName(guestName);
+            int index = guestController.findIndexByUserNameGuest(guestName);
             if (index > -1 ) {
                 return guestController.showListGuest().get(index);
             } else {
                 System.out.println("ten khach ton tai");
             }
         }
+    }
+
+
+
+    public void viewReceiptManager() throws IOException {
+        while (true) {
+            ReceiptView receiptView = new ReceiptView();
+            System.out.println("1. Danh sach hoa don");
+            System.out.println("2. check in");
+            System.out.println("3. check out");
+            System.out.println("4. Xoa hoa don");
+            System.out.println("5. Sua hoa don");
+            System.out.println("6. back");
+            int choiceReceiptM = Integer.parseInt(Path.sc().nextLine());
+            switch (choiceReceiptM) {
+                case 1: {
+                    viewShowListReceipt();
+                    break;
+                }
+                case 2: {
+                    createReceiptCheckIn(Account.STAFF);
+                    break;
+                }
+                case 3:createReceiptCheckOut();break;
+                case 4: break;
+                case 5: break;
+                case 6: break;
+            }
+
+        }
+    }
+    public void viewwReceiptStaff() throws IOException {
+        while (true) {
+            System.out.println("1. Danh sach hoa don");
+            System.out.println("2. check in");
+            System.out.println("3. check out");
+            System.out.println("4. Sua hoa don");
+            System.out.println("5. back");
+            int choiceReceiptM = Integer.parseInt(Path.sc().nextLine());
+            switch (choiceReceiptM) {
+                case 1: {
+                    viewShowListReceipt();
+                    break;
+                }
+                case 2: {
+                    createReceiptCheckIn(Account.STAFF);
+                    break;
+                }
+                case 3:createReceiptCheckOut();
+                case 4: break;
+                case 5: return;
+            }
+
+        }
+    }
+    public void receiptUser() throws IOException {
+        createReceiptCheckIn(Account.USER);
     }
 }
